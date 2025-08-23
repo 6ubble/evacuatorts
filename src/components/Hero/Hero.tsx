@@ -4,68 +4,70 @@ import { BUTTON_LABELS } from './constants.ts'
 function Hero(): React.JSX.Element {
   const { currentSlide, slides, goToSlide } = useHeroSlider()
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      const headerHeight = window.innerWidth >= 768 ? 80 : 64
+      const elementPosition = element.offsetTop - headerHeight
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
     <section id="home" className="relative bg-gray-900 overflow-hidden h-screen w-full min-h-screen">
-      {/* Фон */}
-      <div className="absolute inset-0 bg-gray-900"></div>
+      {/* Фоновые изображения всех слайдов */}
+      {slides.map((slide, index) => (
+        <div
+          key={slide.id}
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === currentSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <img 
+            src={slide.image} 
+            alt={slide.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/70"></div>
+        </div>
+      ))}
 
-      {/* Текущее изображение слайда */}
-      <div className="relative z-10 h-full">
-        <img 
-          src={slides[currentSlide].image} 
-          alt={slides[currentSlide].title}
-          className="w-full h-full object-cover"
-        />
+
         
-        {/* Затемнение */}
-        <div className="absolute inset-0 bg-black/65"></div>
-        
-        {/* Контент поверх изображения */}
-        <div className="absolute inset-0 flex items-center justify-center z-20">
-          <div className="text-center text-white px-4 md:px-8 max-w-5xl">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-tight drop-shadow-lg">
+      {/* Контент поверх изображения */}
+      <div className="absolute inset-0 flex items-center justify-center z-20">
+        <div className="text-center text-white px-6 md:px-12 max-w-4xl">
+          <div
+            key={currentSlide}
+            className="animate-fade-in-up"
+          >
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight tracking-tight">
               {slides[currentSlide].title}
             </h1>
-            <h2 className="text-xl md:text-3xl lg:text-4xl text-pink-200 font-semibold mb-6 md:mb-8 drop-shadow-lg">
+            <h2 className="text-lg md:text-2xl lg:text-3xl text-red-300 font-medium mb-4 md:mb-6 opacity-90">
               {slides[currentSlide].subtitle}
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl text-white mb-8 md:mb-10 leading-relaxed max-w-3xl mx-auto drop-shadow-lg">
+            <p className="text-base md:text-lg lg:text-xl text-gray-200 mb-8 md:mb-10 leading-relaxed max-w-2xl mx-auto opacity-80">
               {slides[currentSlide].description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button 
-                onClick={() => {
-                  const element = document.getElementById('order')
-                  if (element) {
-                    const headerHeight = window.innerWidth >= 768 ? 80 : 64
-                    const elementPosition = element.offsetTop - headerHeight
-                    window.scrollTo({
-                      top: elementPosition,
-                      behavior: 'smooth'
-                    })
-                  }
-                }}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-4 md:py-5 px-8 md:px-10 rounded-full transition-colors duration-200 text-lg md:text-xl"
-              >
-                {BUTTON_LABELS.ORDER}
-              </button>
-              <button 
-                onClick={() => {
-                  const element = document.getElementById('general-pricing')
-                  if (element) {
-                    const headerHeight = window.innerWidth >= 768 ? 80 : 64
-                    const elementPosition = element.offsetTop - headerHeight
-                    window.scrollTo({
-                      top: elementPosition,
-                      behavior: 'smooth'
-                    })
-                  }
-                }}
-                className="border-2 border-white hover:bg-white hover:text-gray-900 text-white font-bold py-4 md:py-5 px-8 md:px-10 rounded-full transition-colors duration-200 text-lg md:text-xl"
-              >
-                {BUTTON_LABELS.PRICES}
-              </button>
-            </div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
+            <button 
+              onClick={() => scrollToSection('order')}
+              className="bg-red-700 hover:bg-red-800 text-white font-semibold py-3 md:py-4 px-6 md:px-8 rounded-full transition-all duration-200 text-base md:text-lg"
+            >
+              {BUTTON_LABELS.ORDER}
+            </button>
+            <button 
+              onClick={() => scrollToSection('general-pricing')}
+              className="border border-white/80 hover:bg-white/80 hover:text-gray-900 text-white font-medium py-3 md:py-4 px-6 md:px-8 rounded-full transition-all duration-200 text-base md:text-lg"
+            >
+              {BUTTON_LABELS.PRICES}
+            </button>
           </div>
         </div>
       </div>

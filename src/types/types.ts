@@ -79,12 +79,3 @@ export interface SubmitStatus {
   type: 'success' | 'error' | null
   message: string
 }
-
-export interface OrderFormProps {
-  formData: OrderFormData
-  isSubmitting: boolean
-  submitStatus: SubmitStatus
-  onInputChange: (field: keyof OrderFormData, value: string) => void
-  onSubmit: (e: React.FormEvent) => void
-  onCloseSuccess: () => void
-}

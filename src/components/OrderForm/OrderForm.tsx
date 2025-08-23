@@ -1,11 +1,43 @@
 import { VEHICLE_TYPES } from './constants.ts'
-import type { OrderFormProps } from '../../types/types.ts'
-import { usePhoneValidation } from './usePhoneValidation.ts'
-import { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+import type { OrderFormSchema } from './schema'
 
-function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubmit, onCloseSuccess }: OrderFormProps): React.JSX.Element {
-  const { phoneError, phoneTouched, handlePhoneChange, handlePhoneBlur, getPhoneHintText } = usePhoneValidation(onInputChange)
-  const [showRequiredErrors, setShowRequiredErrors] = useState<boolean>(false)
+interface OrderFormProps {
+  isSubmitting: boolean
+  submitStatus: {
+    type: 'success' | 'error' | null
+    message: string
+  }
+  onSubmit: (data: OrderFormSchema) => void
+  onCloseSuccess: () => void
+}
+
+function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: OrderFormProps): React.JSX.Element {
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useFormContext<OrderFormSchema>()
+  const watchedVehicleType = watch('vehicleType')
+
+  // Обработчик для строгого ввода телефона с +7
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const input = e.currentTarget
+    const allowedKeys = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End']
+    
+    // Запрещаем удаление +7 в начале
+    if ((e.key === 'Backspace' || e.key === 'Delete') && input.selectionStart! <= 2) {
+      e.preventDefault()
+      return
+    }
+    
+    // Запрещаем ввод символов перед +7 (позиция курсора 0 или 1)
+    if (input.selectionStart! < 2 && !allowedKeys.includes(e.key)) {
+      e.preventDefault()
+      return
+    }
+    
+    // Разрешаем только цифры после +7
+    if (!allowedKeys.includes(e.key) && !/[0-9]/.test(e.key)) {
+      e.preventDefault()
+    }
+  }
 
   return (
     <section id="order" className="pt-16">
@@ -32,24 +64,7 @@ function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubm
             </div>
           )}
 
-          <form onSubmit={(e) => {
-            e.preventDefault()
-            setShowRequiredErrors(true)
-            
-            // Проверяем обязательные поля
-            const hasEmptyFields = !formData.name.trim() || 
-                                  formData.phone === '+7' || 
-                                  !formData.vehicleType || 
-                                  !formData.location.trim()
-            
-            // Если есть незаполненные поля, не отправляем форму
-            if (hasEmptyFields) {
-              return
-            }
-            
-            // Если все поля заполнены, отправляем форму
-            onSubmit(e)
-          }} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Имя и телефон */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -59,19 +74,16 @@ function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubm
                 <input
                   type="text"
                   id="name"
-                  value={formData.name}
-                  onChange={(e) => onInputChange('name', e.target.value)}
+                  {...register('name')}
                   className={`w-full px-3 py-2 border rounded-2xl focus:outline-none transition-colors ${
-                    showRequiredErrors && !formData.name.trim() 
-                      ? 'border-red-500 focus:border-red-500' 
-                      : 'border-gray-300 focus:border-red-400'
+                    errors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-red-400'
                   }`}
                   placeholder="Введите ваше имя"
                 />
-                {showRequiredErrors && !formData.name.trim() && (
+                {errors.name && (
                   <div className="mt-1 text-sm text-red-600 flex items-center">
                     <div className="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
-                    Это поле обязательно
+                    {errors.name.message}
                   </div>
                 )}
               </div>
@@ -82,32 +94,18 @@ function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubm
                 <input
                   type="tel"
                   id="phone"
-                  value={formData.phone}
-                  onChange={handlePhoneChange}
-                  onBlur={() => handlePhoneBlur(formData.phone)}
+                  {...register('phone')}
+                  onKeyDown={handlePhoneKeyDown}
+                  maxLength={12}
                   className={`w-full px-3 py-2 border rounded-2xl focus:outline-none transition-colors ${
-                    (phoneError && phoneTouched) || (showRequiredErrors && (formData.phone === '+7' || phoneError !== ''))
-                      ? 'border-red-500 focus:border-red-500' 
-                      : 'border-gray-300 focus:border-red-400'
+                    errors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-red-400'
                   }`}
-                  placeholder="+7"
+
                 />
-                {phoneError && phoneTouched && (
+                {errors.phone && (
                   <div className="mt-1 text-sm text-red-600 flex items-center">
                     <div className="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
-                    {phoneError}
-                  </div>
-                )}
-                {!phoneError && formData.phone && phoneTouched && formData.phone !== '+7' && getPhoneHintText(formData.phone) && (
-                  <div className="mt-1 text-sm text-green-600 flex items-center">
-                    <div className="w-1 h-1 bg-green-500 rounded-full mr-2"></div>
-                    {getPhoneHintText(formData.phone)}
-                  </div>
-                )}
-                {showRequiredErrors && (formData.phone === '+7' || phoneError !== '') && (
-                  <div className="mt-1 text-sm text-red-600 flex items-center">
-                    <div className="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
-                    Это поле обязательно
+                    {errors.phone.message}
                   </div>
                 )}
               </div>
@@ -122,9 +120,9 @@ function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubm
                 {VEHICLE_TYPES.map((vehicle) => (
                   <div 
                     key={vehicle.id} 
-                    onClick={() => onInputChange('vehicleType', vehicle.id)}
+                    onClick={() => setValue('vehicleType', vehicle.id)}
                     className={`flex items-center p-2 border rounded-2xl cursor-pointer transition-colors ${
-                      formData.vehicleType === vehicle.id 
+                      watchedVehicleType === vehicle.id 
                         ? 'border-red-400' 
                         : 'border-gray-300 hover:border-red-400'
                     }`}
@@ -136,10 +134,10 @@ function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubm
                   </div>
                 ))}
               </div>
-              {showRequiredErrors && !formData.vehicleType && (
+              {errors.vehicleType && (
                 <div className="mt-2 text-sm text-red-600 flex items-center">
                   <div className="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
-                  Это поле обязательно
+                  {errors.vehicleType.message}
                 </div>
               )}
             </div>
@@ -149,25 +147,22 @@ function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubm
               <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
                 Место эвакуации *
               </label>
-                              <input
-                  type="text"
-                  id="location"
-                  value={formData.location}
-                  onChange={(e) => onInputChange('location', e.target.value)}
-                  className={`w-full px-3 py-2 border rounded-2xl focus:outline-none transition-colors ${
-                    showRequiredErrors && !formData.location.trim() 
-                      ? 'border-red-500 focus:border-red-500' 
-                      : 'border-gray-300 focus:border-red-400'
-                  }`}
-                  placeholder="Укажите адрес или описание места"
-                />
-                {showRequiredErrors && !formData.location.trim() && (
-                  <div className="mt-1 text-sm text-red-600 flex items-center">
-                    <div className="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
-                    Это поле обязательно
-                  </div>
-                )}
-              </div>
+              <input
+                type="text"
+                id="location"
+                {...register('location')}
+                className={`w-full px-3 py-2 border rounded-2xl focus:outline-none transition-colors ${
+                  errors.location ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-red-400'
+                }`}
+                placeholder="Укажите адрес или описание места"
+              />
+              {errors.location && (
+                <div className="mt-1 text-sm text-red-600 flex items-center">
+                  <div className="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
+                  {errors.location.message}
+                </div>
+              )}
+            </div>
 
             {/* Описание проблемы */}
             <div>
@@ -177,11 +172,18 @@ function OrderForm({ formData, isSubmitting, submitStatus, onInputChange, onSubm
               <textarea
                 id="description"
                 rows={2}
-                value={formData.description}
-                onChange={(e) => onInputChange('description', e.target.value)}
-                className="w-full px-3 py-2 focus:outline-none rounded-2xl border border-gray-300 resize-none"
+                {...register('description')}
+                className={`w-full px-3 py-2 focus:outline-none rounded-2xl border resize-none transition-colors ${
+                  errors.description ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-red-400'
+                }`}
                 placeholder="Опишите проблему с автомобилем..."
               />
+              {errors.description && (
+                <div className="mt-1 text-sm text-red-600 flex items-center">
+                  <div className="w-1 h-1 bg-red-500 rounded-full mr-2"></div>
+                  {errors.description.message}
+                </div>
+              )}
             </div>
 
             {/* Кнопка отправки */}
