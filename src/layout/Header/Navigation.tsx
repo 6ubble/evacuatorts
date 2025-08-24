@@ -32,7 +32,7 @@ function Navigation({ scrollToSection }: NavigationProps): React.JSX.Element {
       <div className="flex items-center space-x-2 group">
         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
         <div className={`text-xl md:text-2xl font-bold ${textColor} group-hover:text-red-400 transition-colors duration-200`}>
-          +7 922 700-57-07
+          +7 961 288-81-44
         </div>
       </div>
     </div>

@@ -69,7 +69,7 @@ function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps): Reac
             <span className="text-gray-600 font-medium text-lg">Круглосуточно</span>
           </div>
           <div className="text-2xl font-bold text-gray-900 mb-2">
-            +7 922 700-57-07
+            +7 961 288-81-44
           </div>
           <div className="text-base text-gray-500">
             Звоните в любое время
