@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Navigation from './Navigation.tsx'
 import MobileMenuButton from './MobileMenuButton.tsx'
 import MobileMenu from './MobileMenu.tsx'
-import type { ScrollToSectionFunction } from '../../types/types.ts'
+import type { ScrollToSectionFunction } from './types'
 
 function Header(): React.JSX.Element {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)

@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { orderFormSchema, type OrderFormSchema } from './schema'
 import { useState } from 'react'
 import { TelegramService } from '../../telegram/service'
-import type { OrderFormData } from '../../types/types'
+import type { OrderFormData } from './types'
 
 export const useOrderForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)

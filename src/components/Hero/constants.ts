@@ -1,7 +1,7 @@
-import photo1 from '../../assets/1.jpg'
-import photo2 from '../../assets/2.jpg'
-import photo3 from '../../assets/3.jpg'
-import type { HeroSlide, ButtonLabels } from '../../types/types.ts'
+import photo1 from '../../assets/1.webp'
+import photo2 from '../../assets/2.webp'
+import photo3 from '../../assets/3.webp'
+import type { HeroSlide, ButtonLabels } from './types'
 
 export const HERO_SLIDES: HeroSlide[] = [
   {

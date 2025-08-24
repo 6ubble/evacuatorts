@@ -1,4 +1,4 @@
-import type { ServiceItem } from '../../types/types.ts'
+import type { ServiceItem } from './types'
 
 export const SERVICES_DATA: ServiceItem[] = [
   {

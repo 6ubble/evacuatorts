@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import type { MobileMenuProps } from '../../types/types.ts'
+import type { MobileMenuProps } from './types'
 
 function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps): React.JSX.Element {
   // Блокируем скролл на body когда меню открыто

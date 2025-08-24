@@ -1,5 +1,5 @@
 import { TELEGRAM_CONFIG, getTelegramApiUrl, isTelegramConfigured } from './config.ts'
-import type { OrderFormData } from '../types/types.ts'
+import type { OrderFormData } from '../components/OrderForm/types'
 import { VEHICLE_TYPES } from '../components/OrderForm/constants.ts'
 
 // Интерфейс для ответа от Telegram API

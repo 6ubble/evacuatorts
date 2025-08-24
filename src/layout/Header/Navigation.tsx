@@ -1,4 +1,4 @@
-import type { NavigationProps } from '../../types/types.ts'
+import type { NavigationProps } from './types'
 
 function Navigation({ scrollToSection }: NavigationProps): React.JSX.Element {
   const textColor = 'text-white'

@@ -1,4 +1,4 @@
-import type { MobileMenuButtonProps } from '../../types/types.ts'
+import type { MobileMenuButtonProps } from './types'
 
 function MobileMenuButton({ isOpen, onToggle }: MobileMenuButtonProps): React.JSX.Element {
   return (

@@ -1,4 +1,4 @@
-import type { PricingItem } from '../../types/types.ts'
+import type { PricingItem } from './types'
 
 export const PRICING_DATA: PricingItem[] = [
   {
