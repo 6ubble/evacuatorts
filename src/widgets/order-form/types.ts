@@ -5,7 +5,7 @@ export interface OrderFormData {
   phone: string
   vehicleType: string
   location: string
-  description: string
+  description?: string
 }
 
 export interface VehicleType {

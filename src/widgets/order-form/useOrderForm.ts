@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { orderFormSchema, type OrderFormSchema } from './schema'
 import { useState } from 'react'
-import { TelegramService } from '../../telegram/service'
+import { TelegramService } from '../../shared/telegram/service'
 import type { OrderFormData } from './types'
 
 export const useOrderForm = () => {

@@ -1,11 +1,11 @@
-import Header from './layout/Header/Header'
-import Home from './pages/Home'
+import Header from './widgets/header/Header'
+import HomePage from './pages/HomePage'
 
 function App(): React.JSX.Element {
   return (
     <>
       <Header />
-      <Home />
+      <HomePage />
     </>
   )
 }
