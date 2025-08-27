@@ -13,7 +13,7 @@ interface OrderFormProps {
 }
 
 function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: OrderFormProps): React.JSX.Element {
-  const { register, handleSubmit, formState: { errors }, watch, setValue } = useFormContext<OrderFormSchema>()
+  const { register, handleSubmit, formState: { errors }, watch } = useFormContext<OrderFormSchema>()
   const watchedVehicleType = watch('vehicleType')
 
   // Умный обработчик телефона - форматирует на лету
@@ -81,10 +81,10 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: Ord
                   type="text"
                   id="name"
                   {...register('name')}
-                  className={`w-full px-4 py-3 border rounded-2xl focus:outline-none focus:ring-2 transition-all duration-200 text-base ${
+                  className={`w-full px-4 py-3 border rounded-2xl focus:outline-none transition-all duration-200 text-base ${
                     errors.name 
-                      ? 'border-red-500 focus:ring-red-200' 
-                      : 'border-gray-300 focus:border-red-400 focus:ring-red-100'
+                      ? 'border-red-500' 
+                      : 'border-gray-300 focus:border-red-400'
                   }`}
                   placeholder="Введите ваше имя"
                   autoComplete="given-name"
@@ -106,10 +106,10 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: Ord
                   id="phone"
                   {...register('phone')}
                   onChange={handlePhoneChange}
-                  className={`w-full px-4 py-3 border rounded-2xl focus:outline-none focus:ring-2 transition-all duration-200 text-base ${
+                  className={`w-full px-4 py-3 border rounded-2xl focus:outline-none transition-all duration-200 text-base ${
                     errors.phone 
-                      ? 'border-red-500 focus:ring-red-200' 
-                      : 'border-gray-300 focus:border-red-400 focus:ring-red-100'
+                      ? 'border-red-500' 
+                      : 'border-gray-300 focus:border-red-400'
                   }`}
                   placeholder="+7 (999) 123-45-67"
                   autoComplete="tel"
@@ -173,10 +173,10 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: Ord
                 type="text"
                 id="location"
                 {...register('location')}
-                className={`w-full px-4 py-3 border rounded-2xl focus:outline-none focus:ring-2 transition-all duration-200 text-base ${
+                className={`w-full px-4 py-3 border rounded-2xl focus:outline-none transition-all duration-200 text-base ${
                   errors.location 
-                    ? 'border-red-500 focus:ring-red-200' 
-                    : 'border-gray-300 focus:border-red-400 focus:ring-red-100'
+                    ? 'border-red-500' 
+                    : 'border-gray-300 focus:border-red-400'
                 }`}
                 placeholder="Например: ул. Ленина, 10 или трасса М-5, км 150"
                 autoComplete="street-address"
@@ -198,10 +198,10 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: Ord
                 id="description"
                 rows={4}
                 {...register('description')}
-                className={`w-full px-4 py-3 focus:outline-none focus:ring-2 rounded-2xl border resize-vertical transition-all duration-200 text-base ${
+                className={`w-full px-4 py-3 focus:outline-none rounded-2xl border resize-vertical transition-all duration-200 text-base ${
                   errors.description 
-                    ? 'border-red-500 focus:ring-red-200' 
-                    : 'border-gray-300 focus:border-red-400 focus:ring-red-100'
+                    ? 'border-red-500' 
+                    : 'border-gray-300 focus:border-red-400'
                 }`}
                 placeholder="Опишите проблему: не заводится, спущено колесо, попал в ДТП и т.д."
               />
@@ -218,7 +218,7 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: Ord
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 text-lg focus:outline-none focus:ring-2 focus:ring-red-200"
+                className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-2xl transition-all duration-200 text-lg focus:outline-none"
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
@@ -261,7 +261,7 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess }: Ord
               {/* Кнопка закрытия */}
               <button
                 onClick={onCloseSuccess}
-                className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-2xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-200"
+                className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-2xl transition-colors duration-200 focus:outline-none"
               >
                 Понятно
               </button>

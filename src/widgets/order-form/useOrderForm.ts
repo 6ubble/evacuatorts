@@ -16,7 +16,7 @@ export const useOrderForm = () => {
     resolver: yupResolver(orderFormSchema),
     defaultValues: {
       name: '',
-      phone: '+7',
+      phone: '',
       vehicleType: '',
       location: '',
       description: ''
