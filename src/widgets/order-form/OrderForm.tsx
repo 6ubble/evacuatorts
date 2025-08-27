@@ -101,11 +101,11 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess, onPho
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Тип транспорта *
               </label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 {VEHICLE_TYPES.map((vehicle) => (
                   <label 
                     key={vehicle.id}
-                    className={`flex items-center p-2 border rounded-lg cursor-pointer transition-all duration-200 hover:shadow-sm ${
+                    className={`flex items-center justify-center p-3 border rounded-lg cursor-pointer transition-all duration-200 h-10 ${
                       watchedVehicleType === vehicle.id 
                         ? 'border-red-400 bg-red-50 shadow-sm' 
                         : 'border-gray-300 hover:border-red-300 bg-white'
@@ -117,8 +117,8 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess, onPho
                       value={vehicle.id}
                       className="sr-only"
                     />
-                    <div className="flex-1 text-center">
-                      <div className="font-semibold text-gray-900 text-xs">{vehicle.name}</div>
+                    <div className="text-center">
+                      <div className="font-semibold text-gray-900 text-xs leading-tight">{vehicle.name}</div>
                     </div>
                   </label>
                 ))}
@@ -181,11 +181,11 @@ function OrderForm({ isSubmitting, submitStatus, onSubmit, onCloseSuccess, onPho
             </div>
 
             {/* Кнопка отправки */}
-            <div className="pt-2">
+            <div className="pt-2 flex justify-center">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-64 mx-auto block bg-red-400 hover:bg-red-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-full transition-all duration-200 text-base focus:outline-none"
+                className="min-w-[200px] max-w-full px-8 py-3 bg-red-400 hover:bg-red-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold rounded-full transition-all duration-200 text-base focus:outline-none"
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">

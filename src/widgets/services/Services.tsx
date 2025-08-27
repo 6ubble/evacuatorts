@@ -6,7 +6,7 @@ function Services(): React.JSX.Element {
     const element = document.getElementById('order')
     if (element) {
       const headerHeight = window.innerWidth >= 768 ? 80 : 64 // Высота header на разных экранах
-      const elementPosition = element.offsetTop - headerHeight
+      const elementPosition = element.offsetTop - headerHeight + 40
       
       window.scrollTo({
         top: elementPosition,
@@ -29,10 +29,10 @@ function Services(): React.JSX.Element {
         </div>
 
         {/* Сетка услуг */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {SERVICES_DATA.map((service) => (
             <div key={service.id} className="text-center">
-              <div className="mb-2 flex justify-center">
+              <div className="mb-4 flex justify-center">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -42,7 +42,7 @@ function Services(): React.JSX.Element {
               </div>
 
               <div
-                className="inline-block px-3 py-1 border-2 border-gray-300 rounded-full transition-all duration-300 hover:bg-red-400 hover:border-red-400 hover:text-white cursor-pointer"
+                className="inline-flex items-center justify-center px-4 py-2 border-2 border-gray-300 rounded-full transition-all duration-300 hover:bg-red-400 hover:border-red-400 hover:text-white cursor-pointer min-w-[200px] h-12"
                 onClick={handleServiceCardClick}
                 role="button"
                 tabIndex={0}
@@ -61,7 +61,7 @@ function Services(): React.JSX.Element {
                   if (image) image.style.transform = 'scale(1)'
                 }}
               >
-                <h3 className="text-lg font-bold">
+                <h3 className="text-sm font-bold text-center leading-tight">
                   {service.title}
                 </h3>
               </div>

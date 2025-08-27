@@ -6,7 +6,7 @@ function GeneralPricing(): React.JSX.Element {
     const element = document.getElementById('order')
     if (element) {
       const headerHeight = window.innerWidth >= 768 ? 80 : 64 // Высота header на разных экранах
-      const elementPosition = element.offsetTop - headerHeight
+      const elementPosition = element.offsetTop - headerHeight + 40
       
       window.scrollTo({
         top: elementPosition,
