@@ -4,7 +4,7 @@ import { useOrderForm } from './useOrderForm.ts'
 import type { OrderFormSchema } from './schema'
 
 function OrderFormContainer(): React.JSX.Element {
-  const { form, isSubmitting, submitStatus, onSubmit, handleCloseSuccess } = useOrderForm()
+  const { form, isSubmitting, submitStatus, onSubmit, handleCloseSuccess, handlePhoneChange } = useOrderForm()
 
   // Создаем обертку для onSubmit, которая принимает данные формы
   const handleSubmit = (data: OrderFormSchema) => {
@@ -18,6 +18,7 @@ function OrderFormContainer(): React.JSX.Element {
         submitStatus={submitStatus}
         onSubmit={handleSubmit}
         onCloseSuccess={handleCloseSuccess}
+        onPhoneChange={handlePhoneChange}
       />
     </FormProvider>
   )

@@ -1,6 +1,20 @@
 import { SERVICES_DATA } from './constants.ts'
 
 function Services(): React.JSX.Element {
+  // Функция для скролла к форме заказа (такая же как в header и pricing)
+  const handleServiceCardClick = () => {
+    const element = document.getElementById('order')
+    if (element) {
+      const headerHeight = window.innerWidth >= 768 ? 80 : 64 // Высота header на разных экранах
+      const elementPosition = element.offsetTop - headerHeight
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   return (
     <section id="services" className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -15,10 +29,10 @@ function Services(): React.JSX.Element {
         </div>
 
         {/* Сетка услуг */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {SERVICES_DATA.map((service) => (
             <div key={service.id} className="text-center">
-              <div className="mb-4 flex justify-center">
+              <div className="mb-2 flex justify-center">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -29,6 +43,15 @@ function Services(): React.JSX.Element {
 
               <div
                 className="inline-block px-3 py-1 border-2 border-gray-300 rounded-full transition-all duration-300 hover:bg-red-400 hover:border-red-400 hover:text-white cursor-pointer"
+                onClick={handleServiceCardClick}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    handleServiceCardClick()
+                  }
+                }}
                 onMouseEnter={() => {
                   const image = document.getElementById(`image-${service.id}`)
                   if (image) image.style.transform = 'scale(1.05)'

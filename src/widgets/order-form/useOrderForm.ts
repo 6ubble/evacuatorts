@@ -24,6 +24,35 @@ export const useOrderForm = () => {
     mode: 'onBlur'
   })
 
+  // Умный обработчик телефона - форматирует на лету
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value
+    
+    // Разрешаем только цифры, +, пробелы, дефисы, скобки
+    value = value.replace(/[^\d+\s()-]/g, '')
+    
+    // Автоформатирование для удобства ввода
+    const digits = value.replace(/\D/g, '')
+    
+    if (digits.length <= 1) {
+      value = digits
+    } else if (digits.length <= 4) {
+      // +7 (XXX
+      value = `+7 (${digits.slice(1)}`
+    } else if (digits.length <= 7) {
+      // +7 (XXX) XXX
+      value = `+7 (${digits.slice(1, 4)}) ${digits.slice(4)}`
+    } else if (digits.length <= 9) {
+      // +7 (XXX) XXX-XX
+      value = `+7 (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7)}`
+    } else {
+      // +7 (XXX) XXX-XX-XX
+      value = `+7 (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7, 9)}-${digits.slice(9, 11)}`
+    }
+    
+    e.target.value = value
+  }
+
   const onSubmit = async (data: OrderFormSchema) => {
     setIsSubmitting(true)
     setSubmitStatus({ type: null, message: '' })
@@ -49,7 +78,7 @@ export const useOrderForm = () => {
       } else {
         setSubmitStatus({ type: 'error', message: result.message })
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus({ 
         type: 'error', 
         message: 'Произошла ошибка при отправке заказа. Попробуйте позже.' 
@@ -68,6 +97,7 @@ export const useOrderForm = () => {
     isSubmitting,
     submitStatus,
     onSubmit,
-    handleCloseSuccess
+    handleCloseSuccess,
+    handlePhoneChange
   }
 }

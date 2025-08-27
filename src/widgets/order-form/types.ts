@@ -11,7 +11,6 @@ export interface OrderFormData {
 export interface VehicleType {
   id: string
   name: string
-  price: string
 }
 
 export interface SubmitStatus {
