@@ -68,8 +68,13 @@ function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps): Reac
             <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-gray-600 font-medium text-lg">Круглосуточно</span>
           </div>
-          <div className="text-2xl font-bold text-gray-900 mb-2">
-            +7 961 288-81-44
+          <div className="space-y-3 mb-4">
+            <a href="tel:+79612888144" className="block text-2xl font-bold text-gray-900 hover:text-red-600 transition-colors duration-200">
+              +7 961 288-81-44
+            </a>
+            <a href="tel:+79185528686" className="block text-2xl font-bold text-gray-900 hover:text-red-600 transition-colors duration-200">
+              +7 918 552-86-86
+            </a>
           </div>
           <div className="text-base text-gray-500">
             Звоните в любое время

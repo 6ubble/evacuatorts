@@ -42,7 +42,7 @@ function Header(): React.JSX.Element {
           : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex justify-between items-center h-16 md:h-20">
+          <div className="flex justify-between items-center h-24 md:h-28 py-6">
             {/* Навигация - Скрыта на мобильных, видна на md+ */}
             <Navigation scrollToSection={scrollToSection} />
             

@@ -28,12 +28,20 @@ function Navigation({ scrollToSection }: NavigationProps): React.JSX.Element {
         </button>
       </nav>
 
-      {/* Номер телефона - виден на всех устройствах */}
-      <div className="flex items-center space-x-2 group">
-        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-        <div className={`text-xl md:text-2xl font-bold ${textColor} group-hover:text-red-400 transition-colors duration-200`}>
-          +7 961 288-81-44
-        </div>
+      {/* Номера телефонов - видимы на всех устройствах */}
+      <div className="flex flex-col items-end space-y-3">
+        <a href="tel:+79612888144" className="flex items-center space-x-2 group">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <div className={`text-xl md:text-2xl font-bold ${textColor} group-hover:text-red-400 transition-colors duration-200`}>
+            +7 961 288-81-44
+          </div>
+        </a>
+        <a href="tel:+79185528686" className="flex items-center space-x-2 group">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <div className={`text-xl md:text-2xl font-bold ${textColor} group-hover:text-red-400 transition-colors duration-200`}>
+            +7 918 552-86-86
+          </div>
+        </a>
       </div>
     </div>
   )
