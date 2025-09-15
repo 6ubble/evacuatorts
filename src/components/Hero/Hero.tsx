@@ -33,7 +33,7 @@ function Hero(): React.JSX.Element {
           alt="Эвакуатор по всей России"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/75"></div>
+        <div className="absolute inset-0 bg-black/70"></div>
       </div>
 
       {/* Контент поверх изображения */}
