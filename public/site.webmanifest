@@ -1,24 +1,16 @@
 {
-  "name": "Тягач-Хохотач | Эвакуатор Ростов-на-Дону",
+  "name": "Эвакуатор 24/7",
   "short_name": "Эвакуатор РнД",
-  "description": "Круглосуточная служба эвакуации в Ростове-на-Дону и области. Быстро, надежно, недорого!",
-  "start_url": "/?utm_source=pwa",
+  "description": "Круглосуточная служба эвакуации в Ростове-на-Дону и области",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#dc2626",
-  "orientation": "portrait-primary",
-  "scope": "/",
-  "lang": "ru",
-  "dir": "ltr",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "https://s3.twcstorage.ru/dcd39072-64d4703d-c6e7-4803-9e32-dea6459a0f17/images/Evacuator/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "type": "image/svg+xml"
     }
-  ],
-  "categories": ["business", "utilities", "automotive"],
-  "related_applications": [],
-  "prefer_related_applications": false
+  ]
 }

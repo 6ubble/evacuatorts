@@ -1,42 +1,34 @@
-// src/components/Services/constants.ts
-import motorcycleImg from '../../shared/assets/Services/motocikl-foto-mini.webp'
-import carImg from '../../shared/assets/Services/legkovoy-avtomobil-foto-mini.webp'
-import suvImg from '../../shared/assets/Services/vnedorozhnik-foto-mini.webp'
-import minibusImg from '../../shared/assets/Services/mikroavtobus-foto-mini.webp'
-import specialImg from '../../shared/assets/Services/spectehnika-foto-mini.webp'
-import gazelImg from '../../shared/assets/Services/gazel-foto-mini.webp'
-
 import type { ServiceItem } from './types'
 
 export const SERVICES_DATA: ServiceItem[] = [
   {
     id: 'motorcycle',
     title: 'ЭВАКУАЦИЯ МОТОТЕХНИКИ',
-    image: motorcycleImg
+    image: 'https://s3.twcstorage.ru/dcd39072-64d4703d-c6e7-4803-9e32-dea6459a0f17/images/Evacuator/motocikl-foto-mini.webp'
   },
   {
     id: 'car',
     title: 'ЭВАКУАЦИЯ ЛЕГКОВОГО АВТОМОБИЛЯ',
-    image: carImg
+    image: 'https://s3.twcstorage.ru/dcd39072-64d4703d-c6e7-4803-9e32-dea6459a0f17/images/Evacuator/legkovoy-avtomobil-foto-mini.webp'
   },
   {
     id: 'suv',
     title: 'ЭВАКУАЦИЯ ВНЕДОРОЖНИКА',
-    image: suvImg
+    image: 'https://s3.twcstorage.ru/dcd39072-64d4703d-c6e7-4803-9e32-dea6459a0f17/images/Evacuator/vnedorozhnik-foto-mini.webp'
   },
   {
     id: 'minibus',
     title: 'ЭВАКУАЦИЯ МИКРОАВТОБУСА',
-    image: minibusImg
+    image: 'https://s3.twcstorage.ru/dcd39072-64d4703d-c6e7-4803-9e32-dea6459a0f17/images/Evacuator/mikroavtobus-foto-mini.webp'
   },
   {
     id: 'special',
     title: 'ПЕРЕВОЗКА СПЕЦТЕХНИКИ',
-    image: specialImg
+    image: 'https://s3.twcstorage.ru/dcd39072-64d4703d-c6e7-4803-9e32-dea6459a0f17/images/Evacuator/spectehnika-foto-mini.webp'
   },
   {
     id: 'gazel',
     title: 'ЭВАКУАЦИЯ ГАЗЕЛИ',
-    image: gazelImg
+    image: 'https://s3.twcstorage.ru/dcd39072-64d4703d-c6e7-4803-9e32-dea6459a0f17/images/Evacuator/gazel-foto-mini.webp'
   }
 ]
