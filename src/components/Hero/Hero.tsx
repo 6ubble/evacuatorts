@@ -25,7 +25,7 @@ function Hero(): React.JSX.Element {
   }
 
   return (
-    <section id="home" className="relative bg-gray-900 overflow-hidden h-screen w-full min-h-screen">
+    <section id="home" className="relative overflow-hidden h-screen w-full min-h-screen">
       {/* Статичное фоновое изображение */}
       <div className="absolute inset-0">
         <img 
